@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="rounded-md bg-green-50 p-4" th:if="${result}">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm font-medium text-slate-800" th:text="${result}"></p>
+        </div>
+    </div>
+</div>
+<div class="bg-white">
+    <div class="pt-6">
+        <nav aria-label="Breadcrumb">
+            <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                <li>
+                    <a href="/home" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">
+                        Home</a>
+                </li>
+                <li class="text-sm">
+                    <a href="#" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600"
+                    > Orders list</a>
+                </li>
+            </ol>
+        </nav>
+        <div class="mx-auto max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8 px-4 sm:px-6 lg:px-8 pt-12">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                    <h1 class="text-base font-semibold leading-6 text-gray-900">Orders</h1>
+                    <p class="mt-2 text-sm text-gray-700">A list of all the orders in your account including their
+                        products, date and total.</p>
+                </div>
+            </div>
+            <div class="mt-8 flow-root">
+                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                        <table class="min-w-full divide-y divide-gray-300">
+                            <thead>
+                            <tr>
+                                <th scope="col"
+                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                                    Product
+                                </th>
+                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">User
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Total
+                                </th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+
+                            <tr th:each="order: ${orders}">
+                                <td class="flex items-center">
+                                    <img class="h-11 w-11 rounded-full" th:src="${order.product.image}" th:alt="${order.product.description}">
+                                    <span class="ml-4 block py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0" th:text="${order.product.name}"></span>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                                    th:text="${order.user.email}"></td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                                    th:text="${order.orderDate}"></td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                                    th:text="${order.orderTotal}"></td>
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                    <a th:href="@{delete(oid=${order.oid})}" class="text-indigo-600 hover:text-indigo-900">Delete<span class="sr-only"></span></a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
