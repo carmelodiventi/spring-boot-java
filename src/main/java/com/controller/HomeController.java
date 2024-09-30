@@ -31,8 +31,6 @@ public class HomeController {
 
         if ((productName != null && !productName.isEmpty()) || (productPrice != null && productPrice > 0)) {
             listOfProducts = productService.filterProducts(productName, productPrice);
-            model.addAttribute("productName", productName);
-            model.addAttribute("productPrice", productPrice);
         } else {
             listOfProducts = productService.getAllProducts();
         }
